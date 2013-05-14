@@ -16,10 +16,20 @@
     float: left;
     width: 100%;
     border: 2px solid black;
+    padding: 5px;
+    padding-top: 10px;
+
 }
 
 #navstuff li {
     float: left;
     height:30px;
     list-style: none;
+    margin-left: 5px;
 }
+
+footer{	
+	border: 2px solid black;
+	padding: 5px;	
+}
+

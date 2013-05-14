@@ -10,6 +10,7 @@ gem 'nokogiri'
 gem 'json'
 gem 'wikitext', '~> 2.1.1'
 gem 'pry'
+gem 'mini_magick'
 
 gem 'carrierwave'
 gem 'devise'

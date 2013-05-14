@@ -32,6 +32,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
     self.last_body = ""
     @output_file_count = 0
     @write = File.open('wiki.sql', 'w')
+    @entry = {}
   end
   
   def start_document
@@ -41,6 +42,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
   def end_document
     logger.debug "End document"
     @write.close
+
   end
     
   def characters(c)
@@ -58,33 +60,41 @@ class WikiImport < Nokogiri::XML::SAX::Document
     #   logger.debug "element #{name} has key #{k} and value #{v}" 
     # end
 
-    if name == "title" #|| name == "text"
+    if name == "title" || name == "text"
       @name = name
       logger.debug "Found a #{name}"
       @interested = true
-
     else
       @interested = false
     end
   end
   
   def end_element(name)
+
     logger.debug "Finished element #{name}"
-    if name == "title"
+
+
+    if @name == "title"
       sql = "INSERT INTO articles (title) VALUES (\'#{@content}\')\n"
 
       @write << sql
+      @entry = {:content => "#{@content}"}
 
       @interested = false
       #sql << "insert into articles (title) VALUES (#{@title})"
       logger.debug "I've Finished a title!!!"
       #self.last_page[:title] = self.last_body
+      binding.pry
     end
 
-    if name = "body"
+    if @name == "text"
+
       logger.debug "I've finished a body!"
-      self.last_page[:body] = self.last_body
+      @entry = {:text => "#{@content}"}
+      binding.pry
     end
+
+    # if name =="/page"
     
   end
   

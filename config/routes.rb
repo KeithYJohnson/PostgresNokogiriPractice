@@ -1,6 +1,6 @@
 Wikisearch::Application.routes.draw do
   
-  devise_for :users
+  devise_for :users, :controllers => { :registration => "registrations"}
 
   resources :articles 
   match 'wiki/:title' => 'articles#wiki'
