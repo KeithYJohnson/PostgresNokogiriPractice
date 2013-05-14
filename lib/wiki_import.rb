@@ -21,6 +21,8 @@ class WikiImport < Nokogiri::XML::SAX::Document
   
   # The text contents of last element's body 
   attr_accessor :last_body
+
+  
   
   def initialize(logger)
     self.logger = logger
@@ -29,6 +31,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
     self.last_page = {}
     self.last_body = ""
     @output_file_count = 0
+    @write = File.open('wiki.sql', 'w')
   end
   
   def start_document
@@ -37,18 +40,52 @@ class WikiImport < Nokogiri::XML::SAX::Document
   
   def end_document
     logger.debug "End document"
+    @write.close
   end
-  
+    
   def characters(c)
-   
+
+    if @interested == true
+      @content = c
+      logger.debug "This is #{@name}'s content: #{@content}"
+
+    end
   end
 
   def start_element(name, attrs)
     logger.debug "Found element #{name}"
+    # attrs.each do |k,v|
+    #   logger.debug "element #{name} has key #{k} and value #{v}" 
+    # end
+
+    if name == "title" #|| name == "text"
+      @name = name
+      logger.debug "Found a #{name}"
+      @interested = true
+
+    else
+      @interested = false
+    end
   end
   
   def end_element(name)
     logger.debug "Finished element #{name}"
+    if name == "title"
+      sql = "INSERT INTO articles (title) VALUES (\'#{@content}\')\n"
+
+      @write << sql
+
+      @interested = false
+      #sql << "insert into articles (title) VALUES (#{@title})"
+      logger.debug "I've Finished a title!!!"
+      #self.last_page[:title] = self.last_body
+    end
+
+    if name = "body"
+      logger.debug "I've finished a body!"
+      self.last_page[:body] = self.last_body
+    end
+    
   end
   
   def method_missing(m, *args, &block)
