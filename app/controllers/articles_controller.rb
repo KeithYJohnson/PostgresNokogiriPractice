@@ -12,5 +12,12 @@ class ArticlesController < ApplicationController
       render :file => 'public/404.html', :status => 404
     end
   end
+
+  def index
+    #Use this instead of Article.all
+    #like select * from articles limit 30
+    
+  
+  end
   
 end

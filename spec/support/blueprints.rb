@@ -7,7 +7,9 @@ Article.blueprint do
 end
 
 User.blueprint do
-  # Attributes here
+	email {Faker::Internet.email}
+	password { 'password'}
+	password_confirmation {'password'}
 end
 
 Track.blueprint do

@@ -12,14 +12,19 @@ gem 'wikitext', '~> 2.1.1'
 gem 'pry'
 gem 'mini_magick'
 gem 'thinking-sphinx', '~> 3.0.2'
-gem 'mysql2', '0.3.12b5'
+gem 'mysql2', '0.3.12b4'
 gem 'httparty'
 gem 'carrierwave'
 gem 'devise'
 gem 'httparty'
+gem 'thin'
+gem 'better_errors'
+gem 'binding_of_caller'
+
 
 group :development, :test do
   gem 'rspec-rails'
+  # gem 'rack-mini-profiler'
 end
 
 group :test do

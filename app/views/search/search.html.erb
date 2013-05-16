@@ -5,6 +5,9 @@
 		<h3><%= article.title%></h3>
 		<p>
 			<%= link_to "read More", article_path(article.id) %>
+
 		</p>
 	</div>
 <% end %>
+			<%= link_to "Previous", search_url(:page=>(@pagenumber.to_i - 1)) %>
+			<%= link_to "Next", search_url(:page=>(@pagenumber.to_i+1),:blah=>'blah') %>
