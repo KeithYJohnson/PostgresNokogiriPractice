@@ -3,6 +3,7 @@ Wikisearch::Application.routes.draw do
   devise_for :users, :controllers => { :registration => "registrations"}
 
   resources :articles 
+  resources :tracks
   match 'wiki/:title' => 'articles#wiki'
   
   # The priority is based upon order of creation:
