@@ -17,9 +17,6 @@ gem 'httparty'
 gem 'carrierwave'
 gem 'devise'
 gem 'httparty'
-gem 'mysql2',          '0.3.12b4'
-gem 'thinking-sphinx', '3.0.0'
-
 
 group :development, :test do
   gem 'rspec-rails'
