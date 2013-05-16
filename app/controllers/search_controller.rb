@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
 	def search
-		@results = Article.search(params[:term])
+		@results = Article.search(params[:search])
+		
 	end
 end

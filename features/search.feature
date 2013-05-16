@@ -10,4 +10,4 @@ Feature: A music fan search for articles
 		And assuming the Sphinx index is up to date
 		And I am on the homepage
 		When I search for "Sphinx"
-		Then I should see an article about "Searching with Sphinx" 
+		Then I should see an article about "searching with Sphinx" 
