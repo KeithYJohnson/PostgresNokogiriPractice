@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 INSERT INTO articles (title, created_at, updated_at, body) values ('AccessibleComputing', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '#REDIRECT [[Computer accessibility]] {{R from CamelCase}}');
 INSERT INTO articles (title, created_at, updated_at, body) values ('Anarchism', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '{{Redirect|Anarchist|the fictional character|Anarchist (comics)}}
 {{Redirect|Anarchists}}

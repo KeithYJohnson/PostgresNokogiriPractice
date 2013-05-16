@@ -1,5 +1,15 @@
 Wikisearch::Application.routes.draw do
   
+  resources :tracks
+
+  # resources :search, :only => [] do
+  #   collection do
+  #     get :search
+  #   end
+  # end
+  # does the same things as the below match
+  match '/search' => 'search#search', :as => 'search'
+
   devise_for :users, :controllers => { :registration => "registrations"}
 
   resources :articles 

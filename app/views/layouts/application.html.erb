@@ -3,21 +3,34 @@
 <head>
   <title>Wikisearch</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 
 	<header>
-		<nav>
+
 		<ul id="navstuff">
 			<li> Home |  </li>
 			<li> Search | </li> 
 			<li> About | </li> 
 			<li> Contact | </li> 	
 		</ul>
-		</nav>
+
+		<div id="search-box">
+		<%= form_tag search_path do %>
+			<%= text_field_tag :search_box, nil, :id => "search_box" %> 
+			<%= submit_tag "Search" %>
+		<% end %>
+		</div>
+
 	</header>
+
+	<div id="redcircle">
+		<%= image_tag 'rails.png' %>
+	</div>
 
 	<div id="notices">	
     <p class="notice"><%= notice %></p>
