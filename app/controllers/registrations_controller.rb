@@ -1,7 +1,7 @@
-class RegistrationsControler < Devise:RegistrationsControler
+class RegistrationsControler < Devise::RegistrationsController
 
 	def create
-		binding.pry
+
 		super
 	end
 

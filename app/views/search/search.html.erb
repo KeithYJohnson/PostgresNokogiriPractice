@@ -1,0 +1,10 @@
+<h3> Search results </h3>
+
+<% @results.each do |article| %>
+	<div class="article">
+		<h3><%= article.title%></h3>
+		<p>
+			<%= link_to "read More", article_path(article.id) %>
+		</p>
+	</div>
+<% end %>

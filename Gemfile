@@ -7,13 +7,16 @@ gem 'rails', '3.2.13'
 
 gem 'pg'
 gem 'nokogiri'
-gem 'json'
+gem 'json','~> 1.7.7'
 gem 'wikitext', '~> 2.1.1'
 gem 'pry'
 gem 'mini_magick'
-
+gem 'thinking-sphinx', '~> 3.0.2'
+gem 'mysql2', '0.3.12b5'
+gem 'httparty'
 gem 'carrierwave'
 gem 'devise'
+
 
 group :development, :test do
   gem 'rspec-rails'
@@ -23,6 +26,7 @@ group :test do
   gem 'machinist', '>= 2.0.0.beta2'
   gem 'faker'
   gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
 end
 
 # Gems used only for assets and not required

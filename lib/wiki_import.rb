@@ -41,28 +41,17 @@ class WikiImport < Nokogiri::XML::SAX::Document
   def end_document
     logger.debug "End document"
     @write.close
-
   end
     
-  def characters(c)
-
-    if @interested == true and c != nil 
-      @content = c
-
-      if @name == "text"
-        #@entry = {:body => "#{@content}" }
-        @body = @content
-        logger.debug "I've got text"
-
-      elsif @name =="title"
-        #@entry = {:title => "#{@content}"}
-        @title = @content
-        logger.debug "I've got a title"
-      end
-
-      logger.debug "This is #{@name}'s content: #{@content}"
-
+  def characters(text)
+      if @title == "title" and @interested
+        @title = text
+        # binding.pry
+      elsif @body == "text" and @interested
+        @body = text
+      else
     end
+      # logger.debug "This is #{@name}'s content: #{@content}"
   end
 
   def start_element(name, attrs)
@@ -70,31 +59,38 @@ class WikiImport < Nokogiri::XML::SAX::Document
     # attrs.each do |k,v|
     #   logger.debug "element #{name} has key #{k} and value #{v}" 
     # end
+    case name
+      when "title"
+        @title = name
+        @interested = true
 
-    if name == "title" || name == "text"
-
-      @name = name
-      logger.debug "Found a #{name}"
-      @interested = true
-    else
-      @interested = false
-    end
+        logger.debug "match #{name}"
+      when "text"
+        @body = name
+        @interested = true
+        logger.debug "match #{name}"
+      else
+        @interested = false
+      end
+    # logger.debug "Found element #{name}"
   end
   
   def end_element(name)
 
     logger.debug "Finished element #{name}"
     #if @entry.length > 1
-    if name = "/page" and @body != nil
+    if name =="page" and @body != nil
+      @body = @body.gsub("'", "''")
+      @title = @title.gsub("'", "''")
       logger.debug "the hash is good!"
       #sql = "INSERT INTO articles (title, body) VALUES (\'#{@entry[:title]}\',\'#{@entry[:body]}\')\n"
-      sql = "INSERT INTO articles (title, body) values (\'#{@title}\',\'#{@body}\')\n"
+      sql = "INSERT INTO articles (title, created_at, updated_at, body) values (\'#{@title}\', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, \'#{@body}\');\n"
+      # binding.pry
       @write << sql
-      @interested = false
-      logger.debug "I've Finished an entry!!!"
-
       @title = nil
       @body = nil
+      logger.debug "I've Finished an entry!!!"
+      else
     end
 
     # if name =="/page"

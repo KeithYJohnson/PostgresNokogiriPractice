@@ -1,0 +1,67 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @track.title %>
+</p>
+
+<p>
+  <b>Track file:</b>
+  <%= @track.track_file %>
+</p>
+
+<p>
+  <b>Track file:</b>
+  <%= @track.artist %>
+</p>
+
+<div class="Player">
+<%= image_tag 'play.png', :id => 'play-button'%>
+<%= image_tag 'stop.png', :id => 'stop-button'%>
+	<div class="duration">
+
+	</div>
+</div>
+<!-- This replaces the audio player that is in the index for reference -->
+<p> <strong>Audio Playback</strong></p>
+<script>
+	soundManager.setup({
+		url: '/swf/',
+		flashVersion: 9,
+		onready: function() {
+			soundManager.createSound({
+				id: 'mySound',
+				url: '<%= @track.track_file.url %>',
+				autoLoad: true,
+				autoPlay: false,
+				onload: function() {
+					console.log('The sound '+this.id+' loaded!');
+				},
+				whileplaying: function() {
+			    var $duration, // Stopwatch element on the page
+			        incrementTime = 70, // Timer speed in milliseconds
+			        currentTime = 0, // Current time in hundredths of a second
+			        updateTimer = function() {
+			            $duration.html(formatTime(currentTime));
+			            currentTime += incrementTime / 10;
+			        };
+			        init = function() {
+			            $duration = $('.duration');
+			            $.timer(updateTimer, incrementTime, true);
+			        };
+					    $(init);
+					});
+
+					// var seconds = Math.round(this.position/1000);
+					// var count = 
+					// $('.duration').html('<p>' + seconds + '</p>');
+				},
+				volume: 00
+			});
+		}
+	});
+</script>
+
+
+<%= link_to 'Edit', edit_track_path(@track) %> |
+<%= link_to 'Back', tracks_path %>

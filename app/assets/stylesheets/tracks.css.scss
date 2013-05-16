@@ -1,0 +1,16 @@
+// Place all the styles related to the Tracks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+img {
+	display: inline-block;
+	height: 50px;
+	width: auto;
+}
+
+img:hover {
+	margin-bottom: 5px;	
+}
+
+#stop-button {
+	display: none;
+}
