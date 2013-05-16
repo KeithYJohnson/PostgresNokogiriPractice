@@ -22,9 +22,8 @@ class WikiImport < Nokogiri::XML::SAX::Document
   # The text contents of last element's body 
   attr_accessor :last_body
 
-  
-  
   def initialize(logger)
+    logger.debug "Initialized"
     self.logger = logger
     self.attribute_stack = Array.new
     self.page_count = 0
@@ -32,7 +31,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
     self.last_body = ""
     @output_file_count = 0
     @write = File.open('wiki.sql', 'w')
-    @entry = {}
+    #@entry = {}
   end
   
   def start_document
@@ -47,8 +46,20 @@ class WikiImport < Nokogiri::XML::SAX::Document
     
   def characters(c)
 
-    if @interested == true
+    if @interested == true and c != nil 
       @content = c
+
+      if @name == "text"
+        #@entry = {:body => "#{@content}" }
+        @body = @content
+        logger.debug "I've got text"
+
+      elsif @name =="title"
+        #@entry = {:title => "#{@content}"}
+        @title = @content
+        logger.debug "I've got a title"
+      end
+
       logger.debug "This is #{@name}'s content: #{@content}"
 
     end
@@ -61,6 +72,7 @@ class WikiImport < Nokogiri::XML::SAX::Document
     # end
 
     if name == "title" || name == "text"
+
       @name = name
       logger.debug "Found a #{name}"
       @interested = true
@@ -72,26 +84,17 @@ class WikiImport < Nokogiri::XML::SAX::Document
   def end_element(name)
 
     logger.debug "Finished element #{name}"
-
-
-    if @name == "title"
-      sql = "INSERT INTO articles (title) VALUES (\'#{@content}\')\n"
-
+    #if @entry.length > 1
+    if name = "/page" and @body != nil
+      logger.debug "the hash is good!"
+      #sql = "INSERT INTO articles (title, body) VALUES (\'#{@entry[:title]}\',\'#{@entry[:body]}\')\n"
+      sql = "INSERT INTO articles (title, body) values (\'#{@title}\',\'#{@body}\')\n"
       @write << sql
-      @entry = {:content => "#{@content}"}
-
       @interested = false
-      #sql << "insert into articles (title) VALUES (#{@title})"
-      logger.debug "I've Finished a title!!!"
-      #self.last_page[:title] = self.last_body
-      binding.pry
-    end
+      logger.debug "I've Finished an entry!!!"
 
-    if @name == "text"
-
-      logger.debug "I've finished a body!"
-      @entry = {:text => "#{@content}"}
-      binding.pry
+      @title = nil
+      @body = nil
     end
 
     # if name =="/page"
