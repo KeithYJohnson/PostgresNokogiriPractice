@@ -3,6 +3,8 @@ class TracksController < ApplicationController
   # GET /tracks.json
   def index
     @tracks = Track.all
+    id = Track.new.random_number
+    #@random = Article.find(id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +12,7 @@ class TracksController < ApplicationController
     end
   end
 
-  # GET /tracks/1
+  # GET /tracks/1=
   # GET /tracks/1.json
   def show
     @track = Track.find(params[:id])

@@ -44,5 +44,7 @@ body{
     height: 200px;
     border-radius: 50%;
     background: rgba(255,47,30,0.2);
+    position:fixed;
+    left: 100px;
 }
 

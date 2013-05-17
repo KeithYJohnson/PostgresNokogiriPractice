@@ -1,29 +1,29 @@
-<h1>Listing tracks</h1>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Track file</th>
-    <th>Artist</th>
-    <th></th>
-    <th></th>
-  </tr>
-
+<div class="column" id="left">
 <% @tracks.each do |track| %>
-  <tr>
-    <td><%= track.title %></td>
-    <td><%= track.track_file %></td>
-    <td><%= track.artist %></td>
+
+    <h3><%= link_to track.title, track %></h3>
+    <p>SRC: <%= track.track_file %></p><br> 
+      <% if track.artist %>
+        <p><%= track.artist %><p>
+      <% else%>
+        <p>Sorry, we couldn't retrieve that Artist's name</p>
+        <% end %>
     <audio controls="" name="media">
       <source src="<%=track.track_file.url %>" type="audio/mpeg">
-    </audio>
-    <td><%= link_to 'Show', track %></td>
-    <td><%= link_to 'Edit', edit_track_path(track) %></td>
-    <td><%= link_to 'Destroy', track, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+    </audio><br>
+    <p><%= link_to 'Edit', edit_track_path(track) %></p>
+    
 
-<br />
+<% end %>
+</div>
+<% if false %>
+<div class="column" id="right">
+  <div id="random-article">
+    <h1> Random: <%= @random.title%> </h1>
+  </div>
+</div>
+<% end %>
+
 
 <%= link_to 'New Track', new_track_path %>

@@ -9,5 +9,5 @@
 		</p>
 	</div>
 <% end %>
-			<%= link_to "Previous", search_url(:page=>(@pagenumber.to_i - 1)) %>
+			<%= link_to "Previous", search_path(:page=>(@pagenumber.to_i - 1)) %>
 			<%= link_to "Next", search_url(:page=>(@pagenumber.to_i+1),:blah=>'blah') %>
