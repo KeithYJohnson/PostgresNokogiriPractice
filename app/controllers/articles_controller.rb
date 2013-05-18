@@ -16,8 +16,10 @@ class ArticlesController < ApplicationController
   def index
     #Use this instead of Article.all
     #like select * from articles limit 30
+  end
+
+  def mail
     
-  
   end
   
 end

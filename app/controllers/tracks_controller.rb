@@ -3,9 +3,8 @@ class TracksController < ApplicationController
   # GET /tracks.json
   def index
     @tracks = Track.all
-    id = Track.new.random_number
-    #@random = Article.find(id)
-
+    @random = Article.random_article
+    binding.pry
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tracks }

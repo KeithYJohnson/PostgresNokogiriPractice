@@ -20,6 +20,7 @@ gem 'httparty'
 gem 'thin'
 gem 'better_errors'
 gem 'binding_of_caller'
+gem 'redis', "~> 3.0.4"
 
 
 group :development, :test do

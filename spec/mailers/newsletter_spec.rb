@@ -1,6 +1,18 @@
 require "spec_helper"
 
 describe Newsletter do
+	before "create a random article" do
+		ThinkingSphinx::Test.init
+		ThinkingSphinx::Test.start_with_autostop
+
+		@articles = 3.times {
+			article = Article.make
+			article.save!
+		}	
+
+
+
+	end
 
 	describe "A exciting newsletter mailout" do
 		before do
@@ -9,18 +21,28 @@ describe Newsletter do
 				user = User.make
 				user.skip_confirmation!
 				user.save!
-
 			}
 			@members = User.all.map {|u| u.email}
-
 			#Create a user who isn't registered
 			User.make!
-			@email = Newsletter.mailout.deliver
+
+			@article = Article.random_article
+			@email = Newsletter.mailout.deliver(@user)
 		end
 
 		it "should send to a SMTP server" do
 			#This is like a queue of outgoing emails.
 			ActionMailer::Base.deliveries.length.should be
+		end
+
+		it "should have a random article to send" do
+			@article.should be
+			@article.title.should be
+			@article.body.should be
+		end
+
+		it "should include the articles body in the message" do
+			@email.encoded.should match /#{@article.body.w}/
 		end
 
 		it "should have a subject" do

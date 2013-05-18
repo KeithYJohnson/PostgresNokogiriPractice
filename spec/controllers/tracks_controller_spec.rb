@@ -31,10 +31,26 @@ describe TracksController do
   let(:valid_session) { {} }
 
   describe "GET index" do
+    before do
+      @articles = 3.times {
+      article = Article.make
+
+      article.save!
+
+    }
+      @random = Article.random_article
+    end
+
     it "assigns all tracks as @tracks" do
-      track = Track.create! valid_attributes
+      #track = Track.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:tracks).should eq([track])
+      #assigns(:tracks).should eq([track])
+    end
+
+    it "grabs a random article from the database as @random" do
+      @random.should be
+      @random.title.should be
+      @random.body.should be
     end
   end
 
