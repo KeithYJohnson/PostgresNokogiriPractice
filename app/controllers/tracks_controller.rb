@@ -4,7 +4,7 @@ class TracksController < ApplicationController
   def index
     @tracks = Track.all
     @random = Article.random_article
-    binding.pry
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @tracks }

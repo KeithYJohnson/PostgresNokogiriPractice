@@ -17,13 +17,14 @@
 
 <% end %>
 </div>
-<% if false %>
+
 <div class="column" id="right">
   <div id="random-article">
-    <h1> Random: <%= @random.title%> </h1>
+    <h3> Random Article <br><%= @random.title%> </h3>
+    <p> <%= @random.body%></p>
   </div>
 </div>
-<% end %>
+
 
 
 <%= link_to 'New Track', new_track_path %>
