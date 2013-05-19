@@ -1,5 +1,5 @@
 class Newsletter < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "wdi.devtest@gmail.com"
 
   def self.mail_confirmed
   	members = User.select(:email).confirmed.all
@@ -10,7 +10,7 @@ class Newsletter < ActionMailer::Base
   	end
   end
 
-  def mailout
+  def mailout(user)
   	@article = Article.random_article
   	members = User.confirmed.all.map {|u| u.email}
   	mail :to => [], :bcc => members, :subject => "More Amazing News from your friends at"

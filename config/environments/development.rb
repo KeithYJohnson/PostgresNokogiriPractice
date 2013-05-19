@@ -6,6 +6,15 @@ Wikisearch::Application.configure do
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer_smpt_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "localhost.localdomain",
+    user_name: "wdi.devtest",
+    password: "g@wdi001",
+    authentication: "plain",
+    enable_starttls_atuo: true
+  }
 
   # Log error messages when you accidentally call methods on nil.
   config.whiny_nils = true

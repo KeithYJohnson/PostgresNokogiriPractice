@@ -41,6 +41,7 @@ describe "the Action mailer" do
 		@article = Article.random_article
 
 
+
 	end
 
 	it "should grab a random article" do
