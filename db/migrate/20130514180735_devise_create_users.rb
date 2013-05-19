@@ -35,6 +35,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
 
 
       t.timestamps
+      t.confirmable 
+      t.reconfirmable
     end
 
     add_index :users, :email,                :unique => true

@@ -13,6 +13,7 @@
       <source src="<%=track.track_file.url %>" type="audio/mpeg">
     </audio><br>
     <p><%= link_to 'Edit', edit_track_path(track) %></p>
+    <%= link_to 'New Track', new_track_path %>
     
 
 <% end %>
@@ -27,4 +28,3 @@
 
 
 
-<%= link_to 'New Track', new_track_path %>

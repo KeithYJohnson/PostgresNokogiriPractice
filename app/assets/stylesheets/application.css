@@ -31,7 +31,8 @@
 
 footer{	
 	border: 2px solid black;
-	padding: 5px;	
+	padding: 5px;
+    margin-top: 10px;	
     clear:both;
 }
 
