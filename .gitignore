@@ -17,3 +17,4 @@
 wikipedia.sql.gz
 wiki.sql
 data
+/config/initializers/setup_email.rb

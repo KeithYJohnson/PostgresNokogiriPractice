@@ -17,6 +17,9 @@
 			<li> Search | </li> 
 			<li> About | </li> 
 			<li> Contact | </li>
+			<% if false %> 
+			<%= link_to "subscribe to newsletter", :controller => "tracks", :action => "subscribe", :method => :get %>	
+			<% end %>
 
 			<% if user_signed_in? %> 
 
@@ -28,6 +31,12 @@
 
 
 		<% end %> |
+
+			<% if current_user && current_user.subscribed == true %>
+				<%= content_tag(:button, "Foo", :type=>:submit)%>
+			<% else %>
+				<!-- Nothing is user subscribed -->
+			<%end%> 
 
 		</ul>
 

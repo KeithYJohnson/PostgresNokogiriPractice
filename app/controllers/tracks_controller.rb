@@ -11,6 +11,13 @@ class TracksController < ApplicationController
     end
   end
 
+  def subscribe
+    user = current_user
+    user.subscribe
+
+    redirect_to tracks_path
+  end
+
   # GET /tracks/1=
   # GET /tracks/1.json
   def show
